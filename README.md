@@ -12,6 +12,8 @@ cd my-project-name
 pnpm install
 ```
 
+_Or clone this project_
+
 ## Running the dev server
 
 ```shell
@@ -25,6 +27,7 @@ Point your browser to the URL displayed in the terminal (e.g. `http://localhost:
 1. We extend RedwoodSDK's default `Document` to add the script tag that imports `htmx.min.js`.
 2. Page markup includes `hx-get`/`hx-swap` attributes that ask HTMX to fetch fragments rendered by React components.
 3. The fetched HTML contains a placeholder div and the pre-rendered component markup. A small client script mounts the matching React component so it becomes fully interactive.
+4. A standalone HTMX example (`hx-get="/server-time"`) shows how to fetch the current server time and inject it into the page on demand, illustrating classic server-driven interactivity without React.
 
 This pattern lets you keep pages fast and simple while still sprinkling complex React widgets where they add value.
 
