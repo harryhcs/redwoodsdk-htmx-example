@@ -29,6 +29,14 @@ export default function Home() {
         >
           Load Snake
         </button>
+        <button
+          className="bg-yellow-500 text-white px-3 py-2 rounded"
+          hx-get="/server-time"
+          hx-target="#react-slot"
+          hx-swap="innerHTML"
+        >
+          Load Server Time
+        </button>
       </div>
 
 
