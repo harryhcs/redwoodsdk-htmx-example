@@ -1,17 +1,21 @@
-import { defineApp } from "rwsdk/worker";
-import { index, render } from "rwsdk/router";
-
+import { render, route } from "rwsdk/router";
 import { Document } from "@/app/Document";
-import { Home } from "@/app/pages/Home";
-import { setCommonHeaders } from "@/app/headers";
-
-export type AppContext = {};
+import { HTMXDocument } from "@/app/HTMXDocument";
+import { defineApp } from "rwsdk/worker";
+import Home from "./app/Home";
 
 export default defineApp([
-  setCommonHeaders(),
-  ({ ctx }) => {
-    // setup ctx here
-    ctx;
-  },
-  render(Document, [index([Home])]),
+  render(Document, [
+    route("/", () => {
+      return new Response("Hello, world!");
+    }),
+  ]),
+  render(HTMXDocument, [
+    route("/htmx", Home),
+    route("/fragment", ({request}) => {
+      const url = new URL(request.url);
+      const component = url.searchParams.get("component");
+      return new Response(`<div id="react-root" data-component="${component}"></div>`);
+    }),
+  ]),
 ]);
